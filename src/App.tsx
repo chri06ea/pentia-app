@@ -6,7 +6,7 @@ import ChatroomsScreen from './screens/chatrooms';
 
 export default function App() {
   const overlayStyle = {flex: 1};
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <FadeInOverlay style={overlayStyle}>
       {isLoggedIn ? <ChatroomsScreen /> : <LoginScreen />}

@@ -6,7 +6,7 @@ export default function FadeInOverlay<StyleProps>(props: {
   style: StyleProps;
 }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const fadeOut = () => {
+  const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 1000,
@@ -14,7 +14,7 @@ export default function FadeInOverlay<StyleProps>(props: {
     }).start();
   };
   useEffect(() => {
-    fadeOut();
+    fadeIn();
   });
   return (
     <Animated.View style={{...props.style, opacity: fadeAnim}}>
