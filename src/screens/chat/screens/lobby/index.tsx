@@ -6,24 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useChatrooms} from '../../hooks/useChatrooms';
-import {ChatroomCard} from './ChatroomCard';
 
-export default function ChatroomsScreen() {
+import ChatroomCard from './components/ChatroomCard';
+import {useChatrooms} from '../../../../hooks';
+import {useNavigation} from '@react-navigation/native';
+
+export default function Lobby() {
+  const nav = useNavigation();
   const {chatrooms} = useChatrooms();
   const handleChatroomClick = (chatroom: typeof chatrooms[0]) => {
-    console.log(chatroom);
-    setChatSelected(1);
+    nav.push('Groupchat', chatroom);
   };
-  const [chatSelected, setChatSelected] = useState<null | number>(null);
-  if (chatSelected) {
-    return (
-      <View>
-        <Text>Chat</Text>
-      </View>
-    );
-  }
-
+  const handleLogout = () => {};
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
@@ -38,9 +32,9 @@ export default function ChatroomsScreen() {
           </TouchableOpacity>
         ))}
       </View>
-      <View style={styles.bottom}>
+      <TouchableOpacity style={styles.bottom}>
         <Text>Logout</Text>
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
