@@ -6,8 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {useChatrooms} from '../../hooks/useChatrooms';
+import Chatroom from './Chatroom';
 import {ChatroomCard} from './ChatroomCard';
+
+const Stack = createNativeStackNavigator();
 
 export default function ChatroomsScreen() {
   const {chatrooms} = useChatrooms();
@@ -21,7 +25,9 @@ export default function ChatroomsScreen() {
       </View>
       <View style={styles.middle}>
         {chatrooms.map(chatroom => (
-          <TouchableOpacity onPress={() => handleChatroomClick(chatroom)}>
+          <TouchableOpacity
+            key={chatroom.name}
+            onPress={() => handleChatroomClick(chatroom)}>
             <ChatroomCard {...chatroom} />
           </TouchableOpacity>
         ))}
@@ -54,3 +60,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
 });
+function createNativeStackNavigator() {
+  throw new Error('Function not implemented.');
+}
