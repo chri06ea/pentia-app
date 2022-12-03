@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -7,10 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import ErrorMessageDialog from './../../components/ErrorMessageDialog';
 
 export default function LoginScreen() {
-  const handleFacebookAuth = () => {};
+  const [errors, setErrors] = useState(');');
+  const handleFacebookAuth = () => {
+    setErrors('oiwje');
+  };
   const handleGoogleAuth = () => {};
+  if (errors) {
+    return <ErrorMessageDialog errors={errors} setErrors={setErrors} />;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>

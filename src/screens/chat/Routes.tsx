@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import Chatroom from '../chatrooms/Chatroom';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Lobby from './screens/lobby';
 import Groupchat from './screens/groupchat';
+import Lobby from './screens/lobby';
 
 const Stack = createNativeStackNavigator();
 
