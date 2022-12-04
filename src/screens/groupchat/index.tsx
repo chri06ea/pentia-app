@@ -1,3 +1,4 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   ScrollView,
@@ -7,14 +8,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import useGroupchat from '../../hooks/useGroupchat';
 import ChatMessageCard from './components/ChatMessageCard';
-import useChat from '../../../../hooks/useChat';
 
 export default function Groupchat() {
+  const route = useRoute();
   const [inputBuffer, setInputBuffer] = useState('');
-  const {messages, postMessage, postMedia} = useChat();
+  const {messages, postMessage} = useGroupchat(route.params.roomName);
   const handleSend = () => {
-    postMessage(inputBuffer);
+    if (inputBuffer.length > 0) {
+      postMessage(inputBuffer);
+    }
     setInputBuffer('');
   };
   const handleMediaUpload = () => {
@@ -23,11 +27,8 @@ export default function Groupchat() {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.middle}>
-        {messages.map(message => (
-          <ChatMessageCard
-            {...message}
-            key={message.content + message.timestamp}
-          />
+        {messages.map((message, i) => (
+          <ChatMessageCard {...message} key={i} />
         ))}
       </ScrollView>
       <View style={styles.send_message_container}>
@@ -56,11 +57,14 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'flex-end',
+
     flex: 1,
   },
   top: {},
   middle: {
     flex: 1,
+    flexGrow: 1,
   },
   bottom: {},
   send_message_container: {

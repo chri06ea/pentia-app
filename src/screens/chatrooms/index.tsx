@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {
   SafeAreaView,
@@ -7,17 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import useAuth from '../../../../hooks/useAuth';
-import useChat from '../../../../hooks/useChat';
-import {LobbyScreenNavigationProps} from '../../Routes';
+import useAuth from '../../hooks/useAuth';
+import useChatrooms from '../../hooks/useChatrooms';
+import {GroupchatRouteProps} from '../../Routes';
 import ChatroomCard from './components/ChatroomCard';
 
-export default function Lobby() {
-  const nav = useNavigation<LobbyScreenNavigationProps>();
-  const {rooms} = useChat();
+export default function Chatrooms() {
+  const navigation = useNavigation();
+  const {rooms} = useChatrooms();
   const {logout} = useAuth();
   const handleChatroomClick = (chatroom: typeof rooms[0]) => {
-    nav.push('Groupchat', chatroom);
+    navigation.push('Groupchat', {roomName: chatroom.name});
   };
   const handleLogout = () => {
     logout();
@@ -28,11 +28,11 @@ export default function Lobby() {
         <Text style={styles.title}>Chatrum</Text>
       </View>
       <View style={styles.middle}>
-        {rooms.map(chatroom => (
+        {rooms.map(room => (
           <TouchableOpacity
-            key={chatroom.name}
-            onPress={() => handleChatroomClick(chatroom)}>
-            <ChatroomCard {...chatroom} />
+            key={room.name}
+            onPress={() => handleChatroomClick(room)}>
+            <ChatroomCard {...room} />
           </TouchableOpacity>
         ))}
       </View>

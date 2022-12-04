@@ -14,13 +14,13 @@ export default function ChatMessageCard({
     // Translate a date to a string.
     // Depending on current time the result might be: "12:00", "Yesterday", "Thursday", "Last month", "Last year"
     // !TODO
-    return date.toLocaleString();
+    return new Date(date).toLocaleString();
   };
   return (
     <View style={styles.container}>
       <Image
         style={styles.avatar}
-        source={require('./../../../../../../assets/avatar_placeholder.jpg')}
+        source={require('./../../../../assets/avatar_placeholder.jpg')}
       />
       <View style={styles.message_container}>
         <Text style={styles.username}>{poster}</Text>
