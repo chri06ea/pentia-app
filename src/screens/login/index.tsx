@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   Image,
@@ -9,14 +8,19 @@ import {
   View,
 } from 'react-native';
 import ErrorMessageDialog from './../../components/ErrorMessageDialog';
+import useAuth from '../../hooks/useAuth';
 
 export default function LoginScreen() {
+  const auth = useAuth();
   const [errors, setErrors] = useState<string[] | null>(null);
   const handleFacebookAuth = () => {
-    setErrors(['Login failed 😒']);
+    auth.authWithFacebook();
   };
   const handleGoogleAuth = () => {
-    navigation.push('Groupchat', {});
+    auth.authWithGoogle();
+  };
+  const handleAnonymousAuth = () => {
+    auth.authAnonymously();
   };
   if (errors) {
     return <ErrorMessageDialog errors={errors} setErrors={setErrors} />;
@@ -34,6 +38,11 @@ export default function LoginScreen() {
         />
       </View>
       <View style={styles.bottom}>
+        <TouchableOpacity
+          style={{...styles.login_button}}
+          onPress={handleAnonymousAuth}>
+          <Text style={styles.guest_login_text}>Log ind som gæst</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{...styles.login_button, ...styles.facebook_login_button}}
           onPress={handleFacebookAuth}>
@@ -98,6 +107,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   google_login_text: {
+    color: 'black',
+  },
+  guest_login_text: {
     color: 'black',
   },
   image: {

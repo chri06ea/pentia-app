@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -8,50 +8,25 @@ import {
   View,
 } from 'react-native';
 import ChatMessageCard from './components/ChatMessageCard';
+import useChat from '../../../../hooks/useChat';
 
-const chatMessages = [
-  {
-    timestamp: new Date('2000-01-13T00:00:11'),
-    username: 'dan',
-    message: 'hej1',
-  },
-  {
-    timestamp: new Date('2000-01-19T00:00:22'),
-    username: 'dan',
-    message: 'hej2',
-  },
-  {
-    timestamp: new Date('2000-01-11T00:00:01'),
-    username: 'dan',
-    message: 'hej3',
-  },
-  {
-    timestamp: new Date('2000-01-13T00:00:20'),
-    username: 'dan',
-    message: 'hej4',
-  },
-  {
-    timestamp: new Date('2000-01-18T00:00:13'),
-    username: 'dan',
-    message: 'hej5',
-  },
-];
-
-export default function Groupchat({navigation, route}) {
-  console.log(JSON.stringify(navigation));
-  console.log(JSON.stringify(route));
-  const sortedChatMessages = chatMessages.sort((x, y) =>
-    x.timestamp > y.timestamp ? 1 : -1,
-  );
-  const handleSend = () => {};
-  const handleMediaUpload = () => {};
+export default function Groupchat() {
+  const [inputBuffer, setInputBuffer] = useState('');
+  const {messages, postMessage, postMedia} = useChat();
+  const handleSend = () => {
+    postMessage(inputBuffer);
+    setInputBuffer('');
+  };
+  const handleMediaUpload = () => {
+    postMedia('go');
+  };
   return (
     <View style={styles.container}>
       <ScrollView style={styles.middle}>
-        {sortedChatMessages.map(chatMessage => (
+        {messages.map(message => (
           <ChatMessageCard
-            {...chatMessage}
-            key={chatMessage.message + chatMessage.timestamp}
+            {...message}
+            key={message.content + message.timestamp}
           />
         ))}
       </ScrollView>
@@ -63,7 +38,9 @@ export default function Groupchat({navigation, route}) {
         </TouchableOpacity>
         <TextInput
           style={styles.chatbox_input_area}
-          placeholder="Indtast besked..."
+          placeholder="Skriv en besked..."
+          value={inputBuffer}
+          onChangeText={setInputBuffer}
         />
         <TouchableOpacity
           style={styles.chatbox_send_button}

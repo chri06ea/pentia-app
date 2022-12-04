@@ -2,12 +2,12 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 export default function ChatMessageCard({
-  username,
-  message,
+  poster,
+  content,
   timestamp,
 }: {
-  username: string;
-  message: string;
+  poster: string;
+  content: string;
   timestamp: Date;
 }) {
   const formatTimestamp = (date: Date) => {
@@ -23,8 +23,8 @@ export default function ChatMessageCard({
         source={require('./../../../../../../assets/avatar_placeholder.jpg')}
       />
       <View style={styles.message_container}>
-        <Text style={styles.username}>{username}</Text>
-        <Text style={styles.message}>{message}</Text>
+        <Text style={styles.username}>{poster}</Text>
+        <Text style={styles.message}>{content}</Text>
         <Text style={styles.timestamp}>{formatTimestamp(timestamp)}</Text>
       </View>
     </View>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 1,
   },
+  message: {},
   avatar: {
     width: '100%',
     height: undefined,

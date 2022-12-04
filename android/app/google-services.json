@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "795720135104",
+    "project_id": "pentia-935e5",
+    "storage_bucket": "pentia-935e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795720135104:android:2c0a4f40d738a0fbb95825",
+        "android_client_info": {
+          "package_name": "com.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795720135104-e4ebuuod2gf5q5mqjefk6ssv84arqnqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIRM1et_G9i97-y15Hv4f2cNQis6riqxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795720135104-e4ebuuod2gf5q5mqjefk6ssv84arqnqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
