@@ -6,7 +6,7 @@ import Chat from './screens/chat';
 
 export default function App() {
   const overlayStyle = {flex: 1};
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <FadeInOverlay style={overlayStyle}>
       {isLoggedIn ? <Chat /> : <Login />}

@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   Image,
@@ -10,11 +11,13 @@ import {
 import ErrorMessageDialog from './../../components/ErrorMessageDialog';
 
 export default function LoginScreen() {
-  const [errors, setErrors] = useState(');');
+  const [errors, setErrors] = useState<string[] | null>(null);
   const handleFacebookAuth = () => {
-    setErrors('oiwje');
+    setErrors(['Login failed 😒']);
   };
-  const handleGoogleAuth = () => {};
+  const handleGoogleAuth = () => {
+    navigation.push('Groupchat', {});
+  };
   if (errors) {
     return <ErrorMessageDialog errors={errors} setErrors={setErrors} />;
   }
@@ -27,7 +30,7 @@ export default function LoginScreen() {
       <View style={styles.middle}>
         <Image
           style={styles.pentia_logo}
-          source={require('./../../../assets/logo_pentia.png')}
+          source={require('./../../../assets/logo_pentia_white_highres.png')}
         />
       </View>
       <View style={styles.bottom}>
@@ -81,7 +84,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  pentia_logo: {},
+  pentia_logo: {
+    flex: 1,
+    aspectRatio: 1,
+  },
   facebook_login_button: {
     backgroundColor: 'blue',
   },

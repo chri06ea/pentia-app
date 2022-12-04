@@ -1,12 +1,12 @@
 import React from 'react';
-import {Modal, Pressable, StyleSheet, Text} from 'react-native';
+import {Modal, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 export default function ErrorMessageDialog({
   errors,
   setErrors,
 }: {
-  errors: string;
-  setErrors: React.Dispatch<React.SetStateAction<string>>;
+  errors: string[] | null;
+  setErrors: React.Dispatch<React.SetStateAction<string[] | null>>;
 }) {
   return (
     <Modal
@@ -16,11 +16,16 @@ export default function ErrorMessageDialog({
       onRequestClose={() => {
         setErrors(null);
       }}>
-      <Pressable
+      <Text style={styles.title}>Fejl!</Text>
+      {errors?.map(error => (
+        <Text>{error}</Text>
+      ))}
+      <Text style={styles.message}></Text>
+      <TouchableOpacity
         style={[styles.button, styles.buttonClose]}
         onPress={() => setErrors(null)}>
-        <Text style={styles.textStyle}>Hide Mssodal</Text>
-      </Pressable>
+        <Text style={styles.textStyle}>Luk</Text>
+      </TouchableOpacity>
     </Modal>
   );
 }
