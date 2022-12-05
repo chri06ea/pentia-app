@@ -1,14 +1,40 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import useResource from '../../../hooks/useResource';
+
+const ImageResource = ({resourceName}: {resourceName: string}) => {
+  const {url} = useResource(resourceName);
+  if (!url) {
+    return <></>;
+  }
+  return <Image style={styles.img} source={{uri: url}} />;
+};
+
+const DefaultAvatar = () => {
+  return (
+    <Image
+      style={styles.avatar}
+      source={require('./../../../../assets/avatar_placeholder.jpg')}
+    />
+  );
+};
+
+const Avatar = ({resourceName}: {resourceName: string}) => {
+  return <ImageResource resourceName={resourceName} />;
+};
 
 export default function ChatMessageCard({
   poster,
   content,
   timestamp,
+  avatarUri,
+  mediaUri,
 }: {
   poster: string;
   content: string;
   timestamp: Date;
+  avatarUri?: string;
+  mediaUri?: string;
 }) {
   const formatTimestamp = (date: Date) => {
     // Translate a date to a string.
@@ -18,13 +44,17 @@ export default function ChatMessageCard({
   };
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.avatar}
-        source={require('./../../../../assets/avatar_placeholder.jpg')}
-      />
+      {avatarUri ? <Avatar resourceName={avatarUri} /> : <DefaultAvatar />}
       <View style={styles.message_container}>
         <Text style={styles.username}>{poster}</Text>
-        <Text style={styles.message}>{content}</Text>
+        {mediaUri ? (
+          <View style={styles.media}>
+            <ImageResource resourceName={mediaUri} />
+          </View>
+        ) : (
+          <></>
+        )}
+        <Text style={styles.content}>{content}</Text>
         <Text style={styles.timestamp}>{formatTimestamp(timestamp)}</Text>
       </View>
     </View>
@@ -32,6 +62,17 @@ export default function ChatMessageCard({
 }
 
 const styles = StyleSheet.create({
+  media: {
+    flex: 1,
+    aspectRatio: 1,
+  },
+  content: {},
+  img: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -43,19 +84,17 @@ const styles = StyleSheet.create({
   },
   message_container: {
     flex: 10,
-    backgroundColor: 'yellow',
+    backgroundColor: 'rgba(1,1,1,0.1)',
+    borderColor: 'gray',
+    borderWidth: 1,
     borderRadius: 10,
-    padding: 1,
+    padding: 5,
   },
-  message: {},
   avatar: {
-    width: '100%',
-    height: undefined,
-    aspectRatio: 1,
-    flex: 1,
-    borderRadius: 10,
-    margin: 2,
+    width: 30,
+    height: 30,
   },
+
   timestamp: {
     right: 0,
     bottom: 0,

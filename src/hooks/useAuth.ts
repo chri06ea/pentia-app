@@ -3,6 +3,7 @@ import auth from '@react-native-firebase/auth';
 
 export type User = {
   name: string;
+  photoUrl: string | null;
 };
 
 // Handles authentication
@@ -10,11 +11,16 @@ export default function useAuth() {
   const [user, setUser] = useState<null | User>(null);
   useEffect(() => {
     // Make sure user state is updated
-    const unsubscribe = auth().onAuthStateChanged(firebaseUser =>
-      setUser(
-        firebaseUser ? {name: firebaseUser.displayName ?? 'Guest'} : null,
-      ),
-    );
+    const unsubscribe = auth().onAuthStateChanged(firebaseUser => {
+      return setUser(
+        firebaseUser
+          ? {
+              name: firebaseUser.displayName ?? 'Guest',
+              photoUrl: firebaseUser.photoURL,
+            }
+          : null,
+      );
+    });
     return () => unsubscribe();
   }, []);
   return {
