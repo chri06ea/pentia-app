@@ -1,3 +1,9 @@
+**What is this**
+
+Its a chat application for mobile devices made in React Native (No Expo) based on Firebase API.
+
+**Accept test status**
+
 Splash screen
 As a user I would like a nice and clean splash screen while the application loads.
 
@@ -66,3 +72,25 @@ Accepttest
     1. I can upload image from camera 🟢
     2. I can upload image from phone gallery 🟢
     3. Image is shown in the chat room in the same flow as messages 🟢
+
+
+
+**Screenshots**
+
+Screenshot of the login screen
+
+![Screenshot](examples/images/loginscreen.PNG)
+
+Screenshot of the groupchat screen
+
+![Screenshot](examples/images/groupchat.PNG)
+
+
+Screenshot of the chatroom 'lobby'
+
+![Screenshot](examples/images/chatrooms.PNG)
+
+Screenshot of firebase firestore contents
+
+![Screenshot](examples/images/firebase.PNG)
+
