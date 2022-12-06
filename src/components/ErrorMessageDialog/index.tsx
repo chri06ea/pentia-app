@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {Modal, StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 
 export default function ErrorMessageDialog({
   errors,
@@ -16,18 +16,49 @@ export default function ErrorMessageDialog({
       onRequestClose={() => {
         setErrors(null);
       }}>
-      <Text style={styles.title}>Fejl!</Text>
-      {errors?.map(error => (
-        <Text>{error}</Text>
-      ))}
-      <Text style={styles.message}></Text>
-      <TouchableOpacity
-        style={[styles.button, styles.buttonClose]}
-        onPress={() => setErrors(null)}>
-        <Text style={styles.textStyle}>Luk</Text>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.title}>Fejl!</Text>
+        <View style={styles.message}>
+          {errors?.map(error => (
+            <Text key={error}>{error}</Text>
+          ))}
+        </View>
+        <TouchableOpacity style={styles.button} onPress={() => setErrors(null)}>
+          <Text style={styles.button_text}>Luk</Text>
+        </TouchableOpacity>
+      </View>
     </Modal>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    alignItems: 'center',
+    display: 'flex',
+    flex: 1,
+    borderWidth: 1,
+    textAlign: 'center',
+  },
+
+  title: {
+    flex: 1,
+    padding: 10,
+    fontWeight: '800',
+  },
+  message: {
+    flex: 1,
+  },
+  button: {
+    padding: 15,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 15,
+    width: '80%',
+    borderColor: 'gray',
+  },
+  button_text: {
+    textAlign: 'center',
+    color: 'black',
+  },
+});

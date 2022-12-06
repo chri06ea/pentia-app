@@ -37,7 +37,7 @@ export default function Chatrooms() {
         ))}
       </View>
       <TouchableOpacity style={styles.bottom} onPress={handleLogout}>
-        <Text>Logout</Text>
+        <Text style={styles.logout_button_text}>Logout</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -61,6 +61,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottom: {
-    backgroundColor: 'lightblue',
+    borderWidth: 1,
+    width: '100%',
+    padding: 25,
+    borderColor: 'gray',
+    backgroundColor: 'rgba(1,1,1,0.05)',
+  },
+  logout_button_text: {
+    textAlign: 'center',
+    color: 'black',
   },
 });

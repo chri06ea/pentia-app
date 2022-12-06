@@ -17,7 +17,13 @@ export default function LoginScreen() {
     auth.authWithFacebook();
   };
   const handleGoogleAuth = () => {
-    auth.authWithGoogle();
+    auth
+      .authWithGoogle()
+      .then()
+      .catch(error => {
+        console.log(error);
+        setErrors([error]);
+      });
   };
   const handleAnonymousAuth = () => {
     auth.authAnonymously();

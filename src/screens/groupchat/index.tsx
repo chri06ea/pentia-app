@@ -92,22 +92,26 @@ const styles = StyleSheet.create({
   send_message_container: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'red',
   },
   chatbox_input_area: {
+    backgroundColor: 'rgba(1,1,1,0.1)',
     flex: 5,
     borderWidth: 1,
+    borderColor: 'gray',
   },
   chatbox_send_button: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(1,1,1,0.1)',
     textAlign: 'center',
     borderRadius: 10,
     borderWidth: 1,
     marginHorizontal: 1,
+    borderColor: 'gray',
     flex: 1,
   },
   chatbox_media_button: {
+    backgroundColor: 'rgba(1,1,1,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
@@ -115,5 +119,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 1,
     flex: 1,
+    borderColor: 'gray',
   },
 });
