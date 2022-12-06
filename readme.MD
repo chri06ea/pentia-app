@@ -1,6 +1,6 @@
 **What is this**
 
-Its a chat application for mobile devices made in React Native (No Expo) based on Firebase API.
+Its a chat application for mobile devices made with React Native (No Expo) based on Firebase API.
 
 **Accept test status**
 
